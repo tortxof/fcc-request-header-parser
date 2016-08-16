@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
+app.set('trust proxy', true);
 
 app.get('/api/whoami', function(req, res) {
   var ip = req.ip;
