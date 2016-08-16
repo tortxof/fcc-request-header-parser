@@ -4,6 +4,10 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 app.set('trust proxy', true);
 
+app.get('/', function(req, res) {
+  res.redirect('/api/whoami');
+});
+
 app.get('/api/whoami', function(req, res) {
   var ip = req.ip;
   var lang = req.get('Accept-Language').split(',')[0];
