@@ -10,8 +10,14 @@ app.get('/', function(req, res) {
 
 app.get('/api/whoami', function(req, res) {
   var ip = req.ip;
-  var lang = req.get('Accept-Language').split(',')[0];
-  var os = req.get('User-Agent').split('(')[1].split(')')[0];
+  var lang = req.get('Accept-Language') || null;
+  if (lang) {
+    lang = lang.split(',')[0];
+  }
+  var os = req.get('User-Agent') || null;
+  if (os && os.split('').indexOf('(') > -1 && os.split('').indexOf(')') > -1) {
+    os = os.split('(')[1].split(')')[0];
+  }
   res.json({
     ipaddress: ip,
     language: lang,
